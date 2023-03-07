@@ -1,0 +1,87 @@
+MySQL Shell 8.0.32
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 47 (X protocol)
+Server version: 8.0.32 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:33060+ ssl  SQL > use newdb;
+Default schema set to `newdb`.
+Fetching global names, object names from `newdb` for auto-completion... Press ^C to stop.
+ MySQL  localhost:33060+ ssl  newdb  SQL > SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| forum              |
+| information_schema |
+| mysql              |
+| newdb              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0010 sec)
+ MySQL  localhost:33060+ ssl  newdb  SQL > SHOW TABLES;
++-----------------+
+| Tables_in_newdb |
++-----------------+
+| mytesttable     |
+| mytesttable2    |
++-----------------+
+2 rows in set (0.0013 sec)
+ MySQL  localhost:33060+ ssl  newdb  SQL > SELECT User from mysql.user;
++------------------+
+| User             |
++------------------+
+| admin            |
+| app_developer    |
+| app_read         |
+| app_write        |
+| developer        |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
+| viewer           |
+| writer           |
++------------------+
+11 rows in set (0.0007 sec)
+ MySQL  localhost:33060+ ssl  newdb  SQL >
+ MySQL  localhost:33060+ ssl  newdb  SQL > SHOW GRANTS FOR 'developer'@'localhost';
++--------------------------------------------------------------+
+| Grants for developer@localhost                               |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `developer`@`localhost`                |
+| GRANT ALL PRIVILEGES ON `newdb`.* TO `developer`@`localhost` |
+| GRANT `app_developer`@`%` TO `developer`@`localhost`         |
++--------------------------------------------------------------+
+3 rows in set (0.0004 sec)
+ MySQL  localhost:33060+ ssl  newdb  SQL > SHOW GRANTS FOR 'viewer'@'localhost';
++---------------------------------------------------+
+| Grants for viewer@localhost                       |
++---------------------------------------------------+
+| GRANT USAGE ON *.* TO `viewer`@`localhost`        |
+| GRANT SELECT ON `newdb`.* TO `viewer`@`localhost` |
+| GRANT `app_read`@`%` TO `viewer`@`localhost`      |
++---------------------------------------------------+
+3 rows in set (0.0004 sec)
+
+ MySQL  localhost:33060+ ssl  newdb  SQL > SHOW GRANTS FOR 'writer'@'localhost';
++-------------------------------------------------------------------+
+| Grants for writer@localhost                                       |
++-------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `writer`@`localhost`                        |
+| GRANT INSERT, UPDATE, DELETE ON `newdb`.* TO `writer`@`localhost` |
+| GRANT `app_write`@`%` TO `writer`@`localhost`                     |
++-------------------------------------------------------------------+
+3 rows in set (0.0005 sec)
+ MySQL  localhost:33060+ ssl  newdb  SQL >
