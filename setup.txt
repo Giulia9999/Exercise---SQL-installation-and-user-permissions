@@ -1,0 +1,37 @@
+1) \connect root@localhost
+
+2) CREATE USER 'developer'@'localhost' IDENTIFIED BY 'passwordhere';
+
+   FLUSH PRIVILEGES;
+
+3) CREATE USER 'viewer'@'localhost' IDENTIFIED BY 'passwordhere';
+
+   FLUSH PRIVILEGES;
+
+4) CREATE USER 'writer'@'localhost' IDENTIFIED BY 'passwordhere';
+
+   FLUSH PRIVILEGES;
+
+5) SELECT User FROM mysql.user;
+
+6) CREATE ROLE 'app_developer', 'app_read', 'app_write';
+
+7) GRANT ALL ON . TO 'app_developer';
+
+   GRANT SELECT ON . TO 'app_read';
+
+   GRANT INSERT, UPDATE, DELETE ON . TO 'app_write';
+
+8) GRANT 'app_developer' TO 'developer'@'localhost';
+
+   GRANT 'app_read' TO 'viewer'@'localhost';
+
+   GRANT 'app_write' TO 'writer'@'localhost';
+
+9) CREATE DATABASE IF NOT EXISTS newdb;
+
+10) GRANT ALL PRIVILEGES ON newdb.* TO 'developer'@'localhost';
+
+    GRANT SELECT ON newdb.* TO 'viewer'@'localhost';
+
+    GRANT INSERT, UPDATE, DELETE ON newdb.* TO 'writer'@'localhost';
